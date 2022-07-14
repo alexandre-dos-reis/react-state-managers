@@ -2,6 +2,10 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "backend": "apps/backend"
+    "api-interface": "libs/api-interface",
+    "backend": "apps/backend",
+    "rxjs": "apps/rxjs",
+    "rxjs-e2e": "apps/rxjs-e2e",
+    "types": "libs/types"
   }
 }
