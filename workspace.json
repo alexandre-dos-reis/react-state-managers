@@ -4,8 +4,8 @@
   "projects": {
     "api-interface": "libs/api-interface",
     "backend": "apps/backend",
+    "jotai": "apps/jotai",
     "rxjs": "apps/rxjs",
-    "rxjs-e2e": "apps/rxjs-e2e",
     "types": "libs/types"
   }
 }
