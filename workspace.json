@@ -6,6 +6,7 @@
     "backend": "apps/backend",
     "jotai": "apps/jotai",
     "rxjs": "apps/rxjs",
-    "types": "libs/types"
+    "types": "libs/types",
+    "zustand": "apps/zustand"
   }
 }
