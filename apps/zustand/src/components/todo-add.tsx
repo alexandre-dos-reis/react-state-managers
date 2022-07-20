@@ -1,7 +1,7 @@
 import { Button, Input, Grid } from '@chakra-ui/react';
 import { Todo } from '@react-state-managers/types';
 import { ChangeEvent, useState, MouseEvent } from 'react';
-import { useTodoStore } from '../store';
+import { useOnNew } from '../store';
 
 export function TodoAdd() {
   const emptyTodo: Todo = {
@@ -12,7 +12,7 @@ export function TodoAdd() {
     isDone: false,
   };
 
-  const onNewTodo = useTodoStore((s) => s.onNew);
+  const onNewTodo = useOnNew();
   const [newTodo, setNewTodo] = useState<Todo>(emptyTodo);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

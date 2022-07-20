@@ -1,8 +1,11 @@
 import { Button, Input, Flex, Checkbox } from '@chakra-ui/react';
-import { useTodoStore } from '../store';
+import { useOnDelete, useOnToggle, useTodos, useOnUpdate } from '../store';
 
 export function TodoListItems() {
-  const { onDelete, onToggle, onUpdate, todos } = useTodoStore((s) => s);
+  const todos = useTodos();
+  const onDelete = useOnDelete();
+  const onUpdate = useOnUpdate();
+  const onToggle = useOnToggle();
 
   return (
     <>

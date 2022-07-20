@@ -1,29 +1,22 @@
 import { Button, Input, Flex, Checkbox } from '@chakra-ui/react';
 import { useAtom } from 'jotai';
-import {
-  todosAtom,
-  toggleTodoAtom,
-  updateTodoAtom,
-  deleteTodoAtom,
-} from '../store';
+import { todosAtom } from '../store';
+import { deleteTodo, toggleTodo, updateTodo } from '@react-state-managers/types';
 
 export function TodoListItems() {
-  const [todos] = useAtom(todosAtom);
-  const [, toggleTodo] = useAtom(toggleTodoAtom);
-  const [, updateTodo] = useAtom(updateTodoAtom);
-  const [, deleteTodo] = useAtom(deleteTodoAtom);
+  const [todos, setTodos] = useAtom(todosAtom);
 
   return (
     <>
       {todos.map((t) => (
         <Flex pt={2} key={t.id}>
-          <Checkbox isChecked={t.isDone} onChange={() => toggleTodo(t)} />
+          <Checkbox isChecked={t.isDone} onChange={() => setTodos(toggleTodo(todos, t))} />
           <Input
             mx={2}
             value={t.content}
-            onChange={(e) => updateTodo({ ...t, content: e.target.value })}
+            onChange={(e) => setTodos(updateTodo(todos, { ...t, content: e.target.value }))}
           />
-          <Button onClick={() => deleteTodo(t)}>Delete</Button>
+          <Button onClick={() => setTodos(deleteTodo(todos, t))}>Delete</Button>
         </Flex>
       ))}
     </>

@@ -1,29 +1,32 @@
 import { Button, Input, Grid } from '@chakra-ui/react';
-import { Todo } from '@react-state-managers/types';
 import { useAtom } from 'jotai';
-import { ChangeEvent } from 'react';
-import { addTodoAtom, emptyTodo, newTodoAtom } from '../store';
+import { useState } from 'react';
+import { todosAtom } from '../store';
+import { addTodo } from '@react-state-managers/types'
 
 export function TodoAdd() {
-  const [newTodo, setNewTodo] = useAtom(newTodoAtom);
-  const [, addTodo] = useAtom(addTodoAtom);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewTodo({
-      ...emptyTodo,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const [todos, setTodos] = useAtom(todosAtom);
+  const [content, setContent] = useState('');
 
   return (
     <Grid pt={2} templateColumns="5fr 1fr" columnGap="3">
-      <Input
-        placeholder="New todo"
-        value={newTodo.content}
-        name="content"
-        onChange={handleChange}
-      />
-      <Button onClick={() => addTodo()}>Add Todo</Button>
+      <Input placeholder="New todo" value={content} onChange={(e) => setContent(e.target.value)} />
+      <Button
+        onClick={() => {
+          setTodos(
+            addTodo(todos, {
+              id: Date.now(),
+              createdAt: new Date(),
+              updateAt: new Date(),
+              isDone: false,
+              content,
+            })
+          );
+          setContent('');
+        }}
+      >
+        Add Todo
+      </Button>
     </Grid>
   );
 }

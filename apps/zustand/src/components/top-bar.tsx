@@ -1,18 +1,18 @@
 import { Button, Grid } from '@chakra-ui/react';
-import { useTodoStore } from '../store';
+import { useSetTodos } from '../store';
 import { ColorModeSwitcher } from './color-mode-switcher';
 import { environment as env } from '../environments/environment';
 import { TodosGetAllResponse } from '@react-state-managers/api-interface';
 import { useCallback, useEffect } from 'react';
 
 export function TopBar() {
-  const onGet = useTodoStore((s) => s.onGet);
+  const setTodos = useSetTodos();
 
   const onLoad = useCallback(() => {
     fetch(`${env.api}/todos`)
       .then((res) => res.json())
-      .then((data: TodosGetAllResponse) => onGet(data.todos));
-  }, [onGet]);
+      .then((data: TodosGetAllResponse) => setTodos(data.todos));
+  }, [setTodos]);
 
   useEffect(() => {
     onLoad();
